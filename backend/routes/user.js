@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const { signupMiddleware, signinMiddleware } = require("../middleware");
 const { createUser } = require("../db");
 
@@ -14,8 +15,9 @@ router.post("/signup", signupMiddleware, (req, res) => {
 });
 
 router.post("/signin", signinMiddleware, (req, res) => {
+  const secret = process.env.JWT_SECRET;
   return res.json({
-    msg: "this is the real signin route",
+    msg: secret,
   });
 });
 
